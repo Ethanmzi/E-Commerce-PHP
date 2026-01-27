@@ -1,10 +1,4 @@
 <?php
-/**
- * Configuration principale.
- *
- * Pour un usage local, tu peux créer `app/config/config.local.php`
- * (ignoré par git) pour surcharger les valeurs.
- */
 
 return [
     'app' => [
