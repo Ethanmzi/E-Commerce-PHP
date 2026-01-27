@@ -1,13 +1,9 @@
 <?php
-/**
- * Bootstrap application: config, session, timezone.
- */
 
 declare(strict_types=1);
 
 date_default_timezone_set('Europe/Paris');
 
-// Session settings
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
