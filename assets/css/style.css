@@ -1,0 +1,123 @@
+/* --- Variables de couleurs (facile à modifier) --- */
+:root {
+    --primary-color: #0d6efd;    /* Bleu Bootstrap par défaut */
+    --secondary-color: #6c757d;  /* Gris */
+    --dark-color: #212529;       /* Noir/Gris foncé */
+    --light-bg: #f8f9fa;         /* Fond clair */
+    --accent-color: #ffc107;     /* Jaune pour les alertes/promos */
+    --transition-speed: 0.3s;
+}
+
+/* --- Styles Généraux --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    color: var(--dark-color);
+    line-height: 1.6;
+}
+
+/* On s'assure que le footer reste en bas même si la page est peu remplie */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+/* --- Navigation --- */
+.navbar-brand {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-link {
+    font-weight: 500;
+}
+
+/* --- Cartes Produits (Ta nouvelle fonctionnalité) --- */
+.card {
+    border: none;
+    border-radius: 12px;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+/* Effet de survol : la carte monte et une ombre apparaît */
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.card-img-top {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    object-fit: cover;
+    height: 250px; /* Force une hauteur uniforme pour tes images */
+}
+
+/* --- Boutons --- */
+.btn {
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-primary:hover {
+    filter: brightness(90%);
+}
+
+/* --- Formulaires --- */
+.form-control {
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #dee2e6;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}
+
+/* --- Footer --- */
+footer h5 {
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+footer a:hover {
+    color: var(--accent-color) !important;
+    text-decoration: underline !important;
+}
+
+/* --- Utilitaires --- */
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.bg-light-custom {
+    background-color: var(--light-bg);
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border-right: none;
+    color: #6c757d;
+}
+
+.input-group .form-control {
+    border-left: none;
+}
+
+/* --- Responsive fixes --- */
+@media (max-width: 768px) {
+    .display-5 {
+        font-size: 2.5rem;
+    }
+    
+    .card-img-top {
+        height: 200px;
+    }
+}
