@@ -1,8 +1,74 @@
 <?php include 'includes/header.php'; ?>
 
+<?php
+// Récupération dynamique de toutes les images du dossier uploads
+$dossier_images = 'assets/img/uploads/';
+$images = [];
+$extensions_valides = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+
+if (is_dir($dossier_images)) {
+    $fichiers = scandir($dossier_images);
+    foreach ($fichiers as $fichier) {
+        $extension = strtolower(pathinfo($fichier, PATHINFO_EXTENSION));
+        if (in_array($extension, $extensions_valides)) {
+            $images[] = $fichier;
+        }
+    }
+}
+?>
+
 <div class="row">
     <div class="col-md-6 mb-4">
-        <img src="https://via.placeholder.com/600x600" class="img-fluid rounded shadow" alt="Grand format">
+        <!-- Carrousel principal -->
+        <div id="carouselProduit" class="carousel slide carousel-fade" data-bs-ride="false">
+            <div class="carousel-inner rounded shadow">
+                <?php if (!empty($images)): ?>
+                    <?php foreach ($images as $index => $image): ?>
+                        <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+                            <img src="<?php echo $dossier_images . $image; ?>" 
+                                 class="d-block w-100 product-main-image" 
+                                 alt="Image produit <?php echo $index + 1; ?>">
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="carousel-item active">
+                        <img src="https://via.placeholder.com/600x600" class="d-block w-100" alt="Pas d'image">
+                    </div>
+                <?php endif; ?>
+            </div>
+            
+            <?php if (count($images) > 1): ?>
+                <!-- Boutons précédent/suivant -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselProduit" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+                    <span class="visually-hidden">Précédent</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselProduit" data-bs-slide="next">
+                    <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+                    <span class="visually-hidden">Suivant</span>
+                </button>
+            <?php endif; ?>
+        </div>
+
+        <!-- Miniatures des images -->
+        <?php if (count($images) > 1): ?>
+            <div class="product-thumbnails d-flex justify-content-center gap-2 mt-3 flex-wrap">
+                <?php foreach ($images as $index => $image): ?>
+                    <img src="<?php echo $dossier_images . $image; ?>" 
+                         class="thumbnail-img <?php echo $index === 0 ? 'active' : ''; ?>" 
+                         data-bs-target="#carouselProduit" 
+                         data-bs-slide-to="<?php echo $index; ?>"
+                         alt="Miniature <?php echo $index + 1; ?>">
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        <!-- Indicateur du nombre d'images -->
+        <?php if (count($images) > 1): ?>
+            <p class="text-center text-muted mt-2">
+                <small><i class="fa-solid fa-images me-1"></i><?php echo count($images); ?> photos disponibles</small>
+            </p>
+        <?php endif; ?>
     </div>
 
     <div class="col-md-6">
